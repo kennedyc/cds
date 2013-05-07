@@ -1,15 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Election Data: Home</title>
+    <title>CD Collection: Home</title>
+    <link rel="stylesheet" href="/style.css" type="text/css">
   </head>
   <body>
-    <a href="/"><h1>Election Data</h1></a>
-    <div>
-      <a href="/parties/"><h2>List of political parties</h2></a>
-    <div>
-    <div>
-      <a href="/candidates/"><h2>List of candidates</h2></a>
-    <div>
+    <a rel="index" href="/"><h1>CD Collection</h1></a>
+    <div id="cd">
+      <a rel="cd" href="/cds/"><h2>List of CDs</h2></a>
+    </div>
+    <div id="track">
+      <a rel="track" href="/tracks/"><h2>List of tracks</h2></a>
+    </div>
+    <div id="genre">
+      <a rel="genre" href="/genres/"><h2>List of genres</h2></a>
+    </div>
+    <div id="form">
+      <h2>Search:</h2>
+      <form method="get" action="/tracks/" class="track">
+        <label>By Track Name: <input name="name"></label>
+        <button>Search</button>
+      </form>
+      <form method="get" action="/cds/" class="id">
+        <label>By ISBN Number: <input name="id"></label>
+        <button>Search</button>
+      </form>
+      <form method="get" action="/cds/" class="name">
+        <label>By CD Title: <input name="name"></label>
+        <button>Search</button>
+      </form>
+      <form method="get" action="/cds/" class="artist">
+        <label>By Artist: <input name="artist"></label>
+        <button>Search</button>
+      </form>
+      <form method="get" action="/cds/" class="date">
+        <label>By Release Date: <input name="date"></label>
+        <button>Search</button>
+      </form>
+    </div>
   </body>
 </html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CD Collection: All Genres</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body itemscope itemtype="http://schema.org/CollectionPage">
+    <a rel="index" href="/"><h1>CD Collection</h1></a>
+    <div id="genre">
+    <% if (items.length > 0) { %>
+    <ul>
+      <% items.forEach(function(item) { %>
+      <li itemprop="genre" itemscope itemtype="http://schema.org/MusicRecording">
+      <a itemprop="name" rel="genres" href="/genres/<%=item._id%>"><%=item.name%></a></li>
+      <% }); %>
+    </ul>
+    <% } else { %>
+    <div>No genre found.</div>
+    <% } %>
+    </div>
+  </body>
+</html>

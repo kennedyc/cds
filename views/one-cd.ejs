@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CD Collection: <%=item.name%></title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <a rel="index" href="/"><h1>CD Collection</h1></a>
+    <div id="cd" itemscope itemtype="http://schema.org/MusicAlbum">
+    <dl>
+      <dt>Title</dt>
+      <dd itemprop="name"><%=item.name%></dd>
+      <dt itemprop="byArtist" itemscope itemtype="http://schema.org/MusicGroup">Artist</dt>
+      <dd itemprop="name"><%=item.artist%></dd>
+      <dt>Release Date</dt>
+      <dd><%=item.date%></dd>
+      <dt id="track">Tracks</dt>
+      
+      <dd>
+        <% if (related_items.length > 0) { %>
+        <ol>
+          <% related_items.forEach(function(related_item) { %>
+          <li>
+            <a rel="track" itemprop="track" itemscope itemtype="http://schema.org/MusicRecording" href="/tracks/<%=related_item._id%>">
+              <span itemprop="name"><%=related_item.name%></span>
+            </a>
+          </li>
+          <% }); %>
+        </ol>
+        <% } else { %>
+        No tracks have been added to this CD.
+        <% } %>
+      </dd>
+    </dl>
+    <div class="form">
+      <h2>Add a track</h2>
+      <form name="create-track" method="post" action="/tracks/">
+        <input type="hidden" name="item[cd]" value="<%=item._id%>">
+        <!-- The line above links the track to be created to this CD. -->
+        <label>Track name: 
+          <input name="item[name]" type="text" required
+                   placeholder="Drive">
+        </label>
+        <button>Add</button>
+      </form>
+    </div>
+        <div class="form">
+      <h2>Add a genre</h2>
+      <form name="create-genre" method="post" action="/genres/">
+        <input type="hidden" name="item[cd]" value="<%=item._id%>">
+        <!-- The line above links the genre to be created to this CD. -->
+        <label>Genre name: 
+          <input name="item[name]" type="text" required
+                   placeholder="Rock">
+        </label>
+        <button>Add</button>
+      </form>
+    </div>
+    <div class="form">
+      <h2>Delete this CD</h2>
+          <form name="delete-cd" method="post" action="/cds/<%=item._id%>">
+            <input type="hidden" name="_method" value="delete">
+            <input type="hidden" name="item[id]" value="<%=item.id%>">            
+            <input type="hidden" name="item[rev]" value="<%=item._rev%>">  
+            <button>Delete this CD</button>
+          </form>
+    </div>
+  </body>
+</html>

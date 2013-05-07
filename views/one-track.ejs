@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CD Collection: <%=item.name%></title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <a rel="index" href="/"><h1>CD Collection</h1></a>
+    <div id="track" itemprop="track" itemscope itemtype="http://schema.org/MusicRecording">
+    <dl>
+      <dt>Name</dt>
+      <dd itemprop="name"><%=item.name%></dd>
+      <dt>From the CD</dt>
+      <dd itemscope itemtype="http://schema.org/MusicAlbum">
+      <a itemprop="name" href="/cds/<%=item.cd%>"><%=item.cd%></a></dd>
+    </dl>
+    </div>
+    <div class="form">
+      <h2>Update track</h2>
+      <form method="post" action="/tracks/<%=item._id%>" name="update-track">
+        <input type="hidden" name="_method" value="put">
+        <!-- The line above tells the server to treat this as a PUT request. -->
+        <label>Name: 
+          <input name="item[name]" value="<%=item.name%>" type="text" required>
+        </label>
+        <label>CD: 
+          <select name="item[cd]" required>
+            <% related_items.forEach(function(related_item) { %>
+            <option value="<%=related_item._id%>"
+              <% if (related_item._id === item.cd) { %>selected<% } %>>
+              <%=related_item.name%>
+            </option>
+            <% }); %>
+          </select>
+        </label>
+        <button>Update</button>
+      </form>
+    </div>
+    <div class="form">
+      <h2>Delete this Track</h2>
+          <form name="delete-track" method="post" action="/tracks/<%=item._id%>">
+            <input type="hidden" name="_method" value="delete">
+            <input type="hidden" name="item[id]" value="<%=item.id%>">            
+            <input type="hidden" name="item[rev]" value="<%=item._rev%>">  
+            <button>Delete this track</button>
+          </form>
+    </div>
+  </body>
+</html>

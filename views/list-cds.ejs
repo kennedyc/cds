@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CD Collection: All CDs</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body itemscope itemtype="http://schema.org/CollectionPage">
+    <a rel="index" href="/"><h1>CD Collection</h1></a>
+    <% if (items.length > 0) { %>
+    <ul>
+      <% items.forEach(function(item) { %>
+      <li itemscope itemtype="http://schema.org/MusicAlbum">
+      <a rel="cd" itemprop="name" href="/cds/<%=item._id%>"><%=item.name%></a></li>
+      <% }); %>
+    </ul>
+    <% } else { %>
+    <div>No CDs have been added.</div>
+    <% } %>
+    <div class="form">
+      <h2>Add or Update a CD</h2>
+      <script>
+      function onFormSubmit(form) {
+        form.action = form.action + form.elements['item[id]'].value;
+        console.log(form.action);
+        return true;
+      } 
+      </script>
+      <div name="create-cd">
+      <form method="post" action="/cds/"
+            onsubmit="return onFormSubmit(this);">
+        <!-- The line above dynamically sets the PUT destination when the -->
+        <!-- form is submitted. -------------------------------------------->
+        <input type="hidden" name="_method" value="put">
+        <!-- The line above tells the server to treat this as a PUT request. -->
+        <label>ISBN:<br>
+          <input name="item[id]" type="text" pattern="[0-9]+" required
+                 placeholder="0075596029629">
+        </label>
+        <label>CD name: 
+          <input name="item[name]" type="text" required
+                 placeholder="Heartbeat City">
+        </label>
+        <label>Artist: 
+          <input name="item[artist]" type="text" required
+                 placeholder="The Cars">
+        </label>
+                <label>Release Date: 
+          <input name="item[date]" type="text" required
+                 placeholder="1984">
+        </label>
+        <button>Add or update</button>
+      </form>
+      </div>
+    </div>
+  </body>
+</html>
