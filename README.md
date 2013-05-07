@@ -54,3 +54,19 @@ rel
   - cd - Applied to an a tag.  A reference to a CD.
   - add-cd - Applied to an a tag.  A reference to form for adding CDs.
   - track - Applied to an a tag.  A reference to a track on a CD.
+
+Microdata types and properties used to describe the data
+-
+itemtype
+-----------
+  - CollectionPage - http://schema.org/CollectionPage - Indicates the collection or gallery to which the item belongs
+  - MusicAlbum - http://schema.org/MusicAlbum - The album to which this recording belongs.
+  - MusicGroup - http://schema.org/MusicGroup - The artist that performed this album or recording.
+  - MusicRecording - http://schema.org/MusicRecording - A music recording (track), usually a single song.
+
+itemprop
+-----------
+  - byArtist - The artist that performed this album or recording.
+  - genre - Genre of the creative work.
+  - name - Name of the creative work.
+  - track - A music recording (track)—usually a single song.
